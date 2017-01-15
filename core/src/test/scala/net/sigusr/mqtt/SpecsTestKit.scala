@@ -18,15 +18,15 @@ package net.sigusr.mqtt
 
 import akka.actor._
 import akka.stream.ActorMaterializer
-import akka.testkit.{ImplicitSender, TestKit}
+import akka.testkit.{ ImplicitSender, TestKit }
 import com.typesafe.config.ConfigFactory
-import org.specs2.specification.{AfterEach, Scope}
+import org.specs2.specification.{ AfterEach, Scope }
 
 class SpecsTestKit extends TestKit(ActorSystem("MQTTClient-system", ConfigFactory.parseString(config))) with ImplicitSender with Scope with AfterEach {
 
   implicit val materializer = ActorMaterializer()
 
-  class TestActorProxy(val actorBuilder: ActorContext => ActorRef) extends Actor {
+  class TestActorProxy(val actorBuilder: ActorContext ⇒ ActorRef) extends Actor {
     val child = actorBuilder(context)
 
     def receive = {
@@ -37,5 +37,5 @@ class SpecsTestKit extends TestKit(ActorSystem("MQTTClient-system", ConfigFactor
 
   def after = system.terminate()
   def clientActor = testActor
-  def testActorProxy(actorBuilder: ActorContext => ActorRef) = system.actorOf(Props(new TestActorProxy(actorBuilder)))
+  def testActorProxy(actorBuilder: ActorContext ⇒ ActorRef) = system.actorOf(Props(new TestActorProxy(actorBuilder)))
 }

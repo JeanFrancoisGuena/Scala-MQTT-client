@@ -17,7 +17,8 @@ case class Registers(
     inFlightSentFrame: TreeMap[Int, Frame] = TreeMap.empty[Int, Frame],
     inFlightRecvFrame: TreeSet[Int] = TreeSet.empty[Int],
     remainingBytes: BitVector = BitVector.empty,
-    tcpManager: ActorRef = null) {
+    tcpManager: ActorRef = null
+) {
 }
 
 object Registers {

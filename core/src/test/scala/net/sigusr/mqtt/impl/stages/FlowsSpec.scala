@@ -16,19 +16,19 @@
 
 package net.sigusr.mqtt.impl.stages
 
-import akka.stream.scaladsl.{Source, Keep}
-import akka.stream.testkit.scaladsl.{TestSink, TestSource}
+import akka.stream.scaladsl.{ Source, Keep }
+import akka.stream.testkit.scaladsl.{ TestSink, TestSource }
 import akka.util.ByteString
 import net.sigusr.mqtt.SpecsTestKit
-import net.sigusr.mqtt.api.{AtLeastOnce, AtMostOnce}
-import net.sigusr.mqtt.impl.frames.{ConnackFrame, Frame, Header, PublishFrame}
+import net.sigusr.mqtt.api.{ AtLeastOnce, AtMostOnce }
+import net.sigusr.mqtt.impl.frames.{ ConnackFrame, Frame, Header, PublishFrame }
 import org.specs2.mutable._
 import scodec.Codec
 import scodec.bits.ByteVector
 
 object FlowsSpec extends Specification {
 
-  def pullableSource[A](values: A*) = Source.fromIterator[A](() => values.iterator)
+  def pullableSource[A](values: A*) = Source.fromIterator[A](() ⇒ values.iterator)
 
   "A frames to bytes flow" should {
     "Provide a byte stream from a correct frame" in new SpecsTestKit {

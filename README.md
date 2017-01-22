@@ -56,13 +56,11 @@ libraryDependencies ++= Seq(
 )
 ```
 
+Moreover, since version `0.7.0-SNAPSHOT`, there is a cross built set up for Scala 2.11 and 2.12.
+
 ## Dependencies
 
-  * Scala 2.11.8
-  * Akka 2.4.7
-  * Akka Streams 2.4.7
-  * scodec-core 1.10.0
-  * Scalaz 7.2.3
+Roughly speaking this library depends on `Scala`, `Akka` (core and soon I hope streams), `Scodec` core and `Scalaz`.
 
 ## License
 

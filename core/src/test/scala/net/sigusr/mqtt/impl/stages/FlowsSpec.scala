@@ -31,6 +31,7 @@ object FlowsSpec extends Specification {
   def pullableSource[A](values: A*) = Source.fromIterator[A](() ⇒ values.iterator)
 
   "A frames to bytes flow" should {
+
     "Provide a byte stream from a correct frame" in new SpecsTestKit {
       val header = Header(dup = false, AtMostOnce.enum, retain = false)
       val connackFrame = ConnackFrame(header, 0)
@@ -115,6 +116,7 @@ object FlowsSpec extends Specification {
       pub.sendComplete()
       val result = sub.expectComplete()
     }
+
     "Be completed from a completed byte stream" in new SpecsTestKit {
       val flow = new BytesToFrames
       val (pub, sub) = TestSource.probe[ByteString].via(flow).toMat(TestSink.probe[Frame])(Keep.both).run()

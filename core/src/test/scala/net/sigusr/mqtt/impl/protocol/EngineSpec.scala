@@ -19,13 +19,13 @@ package net.sigusr.mqtt.impl.protocol
 import java.net.InetSocketAddress
 
 import akka.actor._
-import akka.io.Tcp.{Abort => TCPAbort, Aborted => TCPAborted, Closed => TCPClosed, CommandFailed => TCPCommandFailed, Connect => TCPConnect, Connected => TCPConnected, Received => TCPReceived, Register => TCPRegister, Write => TCPWrite}
-import akka.testkit.{ImplicitSender, TestProbe}
+import akka.io.Tcp.{ Abort ⇒ TCPAbort, Aborted ⇒ TCPAborted, Closed ⇒ TCPClosed, CommandFailed ⇒ TCPCommandFailed, Connect ⇒ TCPConnect, Connected ⇒ TCPConnected, Received ⇒ TCPReceived, Register ⇒ TCPRegister, Write ⇒ TCPWrite }
+import akka.testkit.{ ImplicitSender, TestProbe }
 import akka.util.ByteString
 import net.sigusr.mqtt.SpecsTestKit
 import net.sigusr.mqtt.api._
 import net.sigusr.mqtt.api.Status
-import net.sigusr.mqtt.impl.frames.{Frame, Header, PublishFrame}
+import net.sigusr.mqtt.impl.frames.{ Frame, Header, PublishFrame }
 import org.specs2.matcher.MatchResult
 import org.specs2.mutable.Specification
 import scodec.Codec
@@ -213,7 +213,7 @@ object EngineSpec extends Specification {
 
       expectMsg(Connected)
 
-      mqttManagerActor ! MqttApiStatus
+      mqttManagerActor ! Status
 
       expectMsg(Connected)
     }
@@ -222,7 +222,7 @@ object EngineSpec extends Specification {
       val fakeTCPManagerActor = new FakeTCPManagerActor
       val mqttManagerActor = system.actorOf(Props(new FakeMQTTManagerParent("MQTTClient", fakeTCPManagerActor.ref)))
 
-      mqttManagerActor ! MqttApiStatus
+      mqttManagerActor ! Status
 
       expectMsg(Disconnected)
     }
@@ -233,7 +233,7 @@ object EngineSpec extends Specification {
 
       mqttManagerActor ! Connect("test", 30, cleanSession = false, Some(Will(retain = false, AtMostOnce, "test/topic", "test death")), None, None)
 
-      mqttManagerActor ! MqttApiStatus
+      mqttManagerActor ! Status
 
       expectMsg(Disconnected)
     }
